@@ -1,0 +1,114 @@
+/* reset */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+input, button {
+    background: none;
+    outline: none;
+    border: none;
+}
+
+/* body css ==================================================== */
+
+body {
+    background: lightyellow;
+}
+
+#wrapper {
+    background: lightpink;
+    width: 80%;
+    height: 800px;
+    padding-bottom: 30px;
+    
+    font-size: 15px;
+
+    margin: 40px auto;
+    box-sizing: border-box;
+}
+#innerWrapper {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 30px;
+}
+
+/* header css ================================================ */
+
+#wrapper header {
+    width: 100%;
+    height: 50px;
+    background: gray;
+    padding: 10px;
+    box-sizing: border-box;
+}
+#wrapper header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* main section css =================================================== */
+
+#wrapper .main {
+    background: orangered;
+    height: 400px;
+}
+
+#wrapper .main .time {
+    background:orange;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    position: relative;
+}
+
+.main .time .clock {
+    width: 25%;
+    
+    justify-content: space-between;
+    background: rgb(152, 152, 152);
+}
+
+.main .time .calender {
+    width: 75%;
+    justify-content: space-between;
+    background: rgb(117, 180, 253);
+}
+
+
+#wrapper .main .dDay {
+    display: flex;
+    position: relative;
+    background: #fff;
+}
+
+.main .dDay .dDaycounter {
+    background: lightgoldenrodyellow;
+    width: 50%;
+    height: 320px;
+    
+}
+
+.main .dDay .dDayinput {
+    background: lightblue;
+    width: 50%;
+    height: 320px;
+}
+
+
+/* footer ================================== */
+#wrapper footer {
+    background: red;
+    height: 30px;
+    box-sizing: border-box;
+    position : relative;
+    transform : translateY(-100%);
+}
+
+footer .bottom {
+    padding: 10px;
+}
+.bottom h1,
+.bottom h2{
+    display: inline;
+}

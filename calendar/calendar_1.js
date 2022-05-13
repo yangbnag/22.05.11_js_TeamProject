@@ -18,9 +18,6 @@ let today = new Date();
 function buildCalendar() {
     let cnt = 0;
 
-
-
-
     // 달력을 만들어서 출력할 table 및 tableTitle을 참조
 
     const $calendarTable = document.getElementById('calendar');
@@ -57,39 +54,69 @@ function buildCalendar() {
     // * 달의 첫날 앞으로는 빈셀을 생성.
 
     let $row = $calendarTable.insertRow(); // insertRow : 행을 추가
+    $row.classList.add('addrow');
 
     // getDay() 는 요일을 출력하는 함수. // 0 = 일 ~ 6 = 토
-    // const $dateDay = [...document.querySelector('#calendar tr:nth-child(2)').children];
+    const $dateDay = [...document.querySelector('#calendar tr:nth-child(2)').children];
     // const [$td0, $td1, $td2, $td3, $td4, $td5, $td6] = [$dateDay.children];
-    // console.log($dateDay);
+    // console.log(typeof $dateDay);
+
 
     // console.log('1일의 요일:', firstDate.getDay());
 
     //첫주차만 따로
-    let dateCount = 0;
+    let dateCount = 0; // 첫날짜가 되었을때 카운터 시작.
+    let holiDayCount = 0;
     for (let i = 0; i < 7; i++) {
         // console.log('돌아라!');
         cell = $row.insertCell(); // insertCell 새로추가된 row 변수에 새로운 셀 추가.
+        holiDayCount++
+        // console.log(holiDayCount);
+
+        if(holiDayCount === 1) {
+        cell.classList.add('sunday');}
+
+        if (holiDayCount === 7) {
+            cell.classList.add('saturday');
+            // console.log(holiDayCount);
+        } 
 
         if (i >= firstDate.getDay()) {
             dateCount++;
             cell.setAttribute('id', dateCount);
             cell.innerHTML = dateCount;
             cell.align = "center";
+
         }
 
         // cnt += 1; // 왜 들어가 있는거지???
+
+        //첫주차 주말 글자색 다르게 처리하기
+
+
     }
     // * 달력에 날짜 채우기
 
     const accumDateCnt = dateCount;
     $row = $calendarTable.insertRow();
+    $row.classList.add('addrow');
     //2주차부터
     for (let i = dateCount + 1; i <= lastDate.getDate(); i++) {
         // lastDate의 마지막 날짜 ex)30 or 31
         cell = $row.insertCell();
         cnt++;
         // dateCount++;
+        // holiDayCount++
+        console.log(cnt);
+
+        if(cnt%7 === 1) {
+        cell.classList.add('sunday');}
+
+        if (cnt%7 === 0) {
+            cell.classList.add('saturday');
+            // console.log(holiDayCount);
+        } 
+        
 
         // console.log(`i: ${i}, cnt: ${cnt}`);
 
@@ -104,9 +131,13 @@ function buildCalendar() {
         if (cnt % 7 === 0) {
 
             // cell.innerHTML = "<font color=skyblue>" + i + "</font>";
-            $row = $calendarTable.insertRow(); // 행추가
+            $row = $calendarTable.insertRow(); // 행추가 
+            // console.log($row);
+            $row.classList.add('addrow');
         }
     }
+
+
     // * 달력의 마지막날 뒤 빈칸 행으로 채우기 
     /* if (cnt % 7 != 0) {
          for (i = 0; i < 7 - (cnt % 7); i++) {
@@ -117,33 +148,53 @@ function buildCalendar() {
 }
 // 선택한 일자를 출력하기
 
-/*
-cell.onclick = function(){
-	clickedYear = today.getFullYear();
-	clickedMonth = ( 1 + today.getMonth() );
-	clickedDate = this.getAttribute('id');
-	
-	clickedDate = clickedDate >= 10 ? clickedDate : '0' + clickedDate;    
-	clickedMonth = clickedMonth >= 10 ? clickedMonth : '0' + clickedMonth;
-	clickedYMD = clickedYear + "-" + clickedMonth + "-" + clickedDate;
-				
-	opener.document.getElementById("date").value = clickedYMD;
-	self.close();
-}*/
-
 
 
 // 이전달 이동
 function prevCalendar() {
     today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
     buildCalendar();
-    
+
 }
 
 // 다음달 이동
 function nextCalendar() {
     today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
     buildCalendar();
+}
+
+// 오늘의 요일만 출력 하는 함수
+
+const $todays = document.querySelector('.day');
+// console.log($todays);
+const day = today.getDay();
+// console.log(day);
+
+function theseDay() {
+    if (day === 0) {
+        $todays.textContent = 'Mon';
+    } else if (day === 1) {
+        $todays.textContent = 'Tue';
+    } else if (day === 2) {
+        $todays.textContent = 'Tue';
+    } else if (day === 3) {
+        $todays.textContent = 'Wed';
+    } else if (day === 4) {
+        $todays.textContent = 'Thu';
+    } else if (day === 5) {
+        $todays.textContent = 'Fri';
+    } else if (day === 6) {
+        $todays.textContent = 'Sat';
+    }
+
+}
+const $todate = document.querySelector('.todate');
+// console.log($todate);
+const date = today.getDate();
+// console.log(date);
+
+function thesDate() {
+    $todate.textContent = date;
 }
 
 
@@ -176,28 +227,14 @@ function nextCalendar() {
       - 연월일을 yyyy-mm-dd로 출력할 수 있게 형식 만듭니다.
       - 부모창에 계산된 일자를 출력하고 현재창은 닫습니다.
 */
-    /*
-        $toDoList.addEventListener('click', e => {
-            if (e.target.matches('.remove span')) {
-                // 할 일 삭제 버튼 클릭 이벤트
-                // console.log('할 일 삭제!!!');
-                
-                if (confirm('정말로 삭제할까요??')) {
-                    removeToDo(e.target.parentElement.parentElement);
-                }
-            } else if (e.target.matches('.modify .lnr-undo')) {
-                // 할 일 수정모드 진입 클릭 이벤트
-                // console.log('수정 모드 진입');
-                enterModifyMode(e.target);
-            } else if (e.target.matches('.modify .lnr-checkmark-circle')) {
-                // 할 일 수정 완료 클릭 이벤트
-                // console.log('수정 완료!');
-                modifyToDo(e.target);
-            }
-        });    
+
+    // 오늘의 요일만 출력
+    theseDay();
+
+    thesDate();
 
 
-    */
+
 
 })();
 

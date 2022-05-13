@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,14 +17,23 @@
     <!-- css 연결 -->
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="../calendar/calendar.css">
+    <link rel="stylesheet" href="../clock/clock.css">
+    <link rel="stylesheet" href="./d-da2.css">
 
-    <!-- jsc 연결 -->
+    <!-- js 연결 -->
     <script src="../calendar/calendar_1.js" defer></script>
+    <script src="../clock/clock.js" defer></script>
+    <script src="../HTML/dDay.js" defer></script>
+    <script src="d-day2.js" defer></script>
+
+
+
 
 </head>
+
 <body>
     <div id="wrapper">
-        
+
         <div id="innerWrapper">
             <header>
                 <h1 class="title">
@@ -32,38 +42,88 @@
             </header>
             <section class="main">
                 <div class="time">
-                    <div class="clock">시계</div>
+                    <div class="firstclock">
+                        <div class="wrap">
+                            <div class="clock">
+                                <!-- 숫자 -->
+                                <div class="numbers"></div>
+                                <!-- 가운데 중심, 초, 분, 시 바늘 -->
+                                <div id="center"></div>
+                                <div id="hour"></div>
+                                <div id="minute"></div>
+                                <div id="second"></div>
+                            </div>
+                            <!-- 텍스트 시계  -->
+                            <div class="digital-clock">00:00</div>
+
+                            <!-- <script src="clock.js"></script> -->
+                        </div>
+                    </div>
                     <div class="calender">
                         <div id="calendarWrapper">
                             <div id="showtoday">
                                 <div class="day"></div>
                                 <div class="todate"></div>
                             </div>
-                          <div id="calendarBox">
-                          <table id="calendar" class="center">
-                                <tr>
-                                    <td id ="pre" class="center"><label> ◀ </label></td>
-                                    <td colspan="5" class="center" id="calendarTitle" style="text-align: center;">yyyy년 m월</td>
-                                    <td id ="next" class="center"><label> ▶ </label></td>
-                                </tr>
-                                <tr>
-                                    <td class="tdDay" date-day="0" style= "color: red;">일</td>
-                                    <td class="tdDay" date-day="1">월</td>
-                                    <td class="tdDay" date-day="2">화</td>
-                                    <td class="tdDay" date-day="3">수</td>
-                                    <td class="tdDay" date-day="4">목</td>
-                                    <td class="tdDay" date-day="5">금</td>
-                                    <td class="tdDay" date-day="6" style= "color: blue;">토</td>
-                                </tr>
-                        
-                            </table>
-                    </div>
+                            <div id="calendarBox">
+                                <table id="calendar" class="center">
+                                    <tr>
+                                        <td id="pre" class="center"><label> ◀ </label></td>
+                                        <td colspan="5" class="center" id="calendarTitle" style="text-align: center;">
+                                            yyyy년 m월</td>
+                                        <td id="next" class="center"><label> ▶ </label></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdDay" date-day="0" style="color: red;">일</td>
+                                        <td class="tdDay" date-day="1">월</td>
+                                        <td class="tdDay" date-day="2">화</td>
+                                        <td class="tdDay" date-day="3">수</td>
+                                        <td class="tdDay" date-day="4">목</td>
+                                        <td class="tdDay" date-day="5">금</td>
+                                        <td class="tdDay" date-day="6" style="color: blue;">토</td>
+                                    </tr>
+
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="dDay">
-                    <div class="dDaycounter">디데이카운터</div>
-                    <div class="dDayinput">디데이입력</div>
+                    <div class="dDaycounter">
+                        <div class="d-day-container">
+                            <div data-id="1" class="container">
+                                <h1 id="remain-time"></h1>
+                                <h2>D-Day</h2>
+                                <p class="d-day"></p>
+                                <div class="remove">
+                                    <span class="lnr lnr-cross-circle"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dDayinput">
+                        <!-- 날짜 입력하는 곳 시작일/종료일 만들기 -->
+                        <section class="dateinputTitle">
+                            <h1>디데이 계산기</h1>
+                        </section>
+                        <section class="dateInput">
+
+                            <form class="dateInputform">
+
+
+                                <div class="dateInputform">
+                                    <input type="text" id="dDayTitle" placeholder="디데이명을 입력하세요." autocomplete="off">
+
+                                    <input type="date" id="startDay" placeholder="시작일" autocomplete="off">
+
+                                    <input type="date" id="endDay" placeholder="종료일" autocomplete="off">
+                                    <button id="addDate">click!!</button>
+                                </div>
+
+
+                            </form>
+                        </section>
+                    </div>
                 </div>
             </section>
         </div>
@@ -77,6 +137,7 @@
 
 
     </div>
-    
+
 </body>
+
 </html>

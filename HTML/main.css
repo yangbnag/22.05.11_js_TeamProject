@@ -62,11 +62,11 @@ body {
     position: relative;
 }
 
-.main .time .clock {
-    width: 25%;
-    
+.main .time .firstclock {
+    width: 300px;    
     justify-content: space-between;
-    background: rgb(152, 152, 152);
+    background: rgb(152, 152, 152); 
+    
 }
 
 .main .time .calender {
